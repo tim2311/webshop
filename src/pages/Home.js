@@ -1,5 +1,7 @@
+import Layout from "./Layout.js";
+
 const Home = () => {
-    return <h1>Home</h1>;
+    return <Layout/>
   };
   
   export default Home;
