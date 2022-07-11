@@ -14,6 +14,7 @@ function App() {
           <Route path="blogs" element={<Blogs />} />
           <Route path="contact" element={<Contact />} />
           <Route path="createaccount" element={<CreateAccount/>}/>
+          <Route path="*" element={<NoPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
