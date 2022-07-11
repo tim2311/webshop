@@ -1,8 +1,9 @@
 .center {
-  height: 200px;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 200px;
   justify-content: center;
+  margin-top: 25px;
 }
 
 .item {
