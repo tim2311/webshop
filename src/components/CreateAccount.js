@@ -9,40 +9,44 @@ function CreateAccount() {
         password: ""
     });
 
-    function onChange (e) {
-        setAccountData({[e.target.name]: e.target.value});
+    const updateAccountData = (event) => {
+        setAccountData((prevProps) => ({
+            ...prevProps,
+            [event.target.name]: event.target.value
+        }));
     };
 
-    function newUser (e) {
+    function submitAccountData() {
         
-        fetch('http://localhost:4000/signup', {   
-        method: "POST",
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(useState)
+        console.log(accountData);
+        fetch('http://localhost:4000/signup', {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(accountData)
         })
-        .then((response) => response.json())
-        .then((result) => {
-        console.log(result)
-        })
+            .then((response) => response.json())
+            .then((result) => {
+                console.log(result)
+            })
     }
 
     return (
         <div class="center">
-            <Form>
+            <Form onSubmit={submitAccountData}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control onChange={onChange} name="email" sizetype="email" placeholder="Enter email" />
+                    <Form.Control onChange={updateAccountData} name="email" value={accountData.email} sizetype="email" placeholder="Enter email" />
                     <Form.Text className="text-muted">
                     </Form.Text>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={onChange} name="password" type="password" placeholder="Password" />
+                    <Form.Control onChange={updateAccountData} value={accountData.password} name="password" type="password" placeholder="Password" />
                 </Form.Group>
-                <Button onClick={newUser} variant="secondary" type="submit">
+                <Button variant="secondary" type="submit">
                     Submit
                 </Button>
             </Form>
