@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './create-account.css';
+
 
 function CreateAccount() {
 

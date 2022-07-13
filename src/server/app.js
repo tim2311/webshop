@@ -3,10 +3,23 @@ var cors = require('cors');
 var app = express();
 const bodyParser = require('body-parser');
 
-app.use(cors({origin: 'http://localhost:3000'}));
+// Start Mongoose code.
+const mongoose = require('mongoose');
+
+mongoose.connect("mongodb://localhost:27017/customerDB");
+
+const customerSchema = new mongoose.Schema({
+  email: String,
+  password: String
+});
+
+const Customer = new mongoose.model("Customer", customerSchema);
+// End Mongoose code.
+
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: true
+  extended: true
 }));
 
 const port = 4000;
