@@ -1,0 +1,11 @@
+.center {
+  align-items: center;
+  display: flex;
+  height: 200px;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.item {
+  width: 20em;
+}

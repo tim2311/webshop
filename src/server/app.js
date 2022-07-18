@@ -51,6 +51,10 @@ app.post('/', function (req, res) {
   console.log(req);
 });
 
+app.post('/login', function (req, res) {
+  console.log(req.body.email, req.body.password);
+});
+
 app.post('/signup', function (req, res) {
   console.log(req.body.email, req.body.password);
   const newCustomer = new Customer({ email: req.body.email, password: req.body.password});

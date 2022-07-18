@@ -16,7 +16,7 @@ const Layout = () => {
             <Nav.Link as={Link} to="/Blogs">Blogs</Nav.Link>
             <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Log In</NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="LogIn">Log In</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="CreateAccount">Create Account</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
