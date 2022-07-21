@@ -1,46 +1,50 @@
-var express = require('express');
-var cors = require('cors');
-var app = express();
+// Imports
+const express = require('express');
+const cors = require('cors');
+const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require("passport");
+const passportLocal = require("passport-local").Strategy;
+const cookieParser = require("cookie-parser");
+const bcrypt = require("bcryptjs");
+const session = require("express-session");
+const Customer = require("./customer");
 
-main().catch(err => console.log(err));
-
+// Database connect.
 mongoose.connect('mongodb://localhost:27017/customerDB');
 
-const customerSchema = new mongoose.Schema({
-  email: String,
-  password: String
-});
-
-const Customer = mongoose.model('Customer', customerSchema);
-
-async function main() {
-    
-   
-    
-    // const newCustomer = new Customer({ email: 'user@email.com', password: '123' });
-    // console.log(newCustomer.name); // 'Silence'
-    // // NOTE: methods must be added to the schema before compiling it with mongoose.model()
-    // customerSchema.methods.speak = function speak() {
-    //     const greeting = this.name
-    //         ? "Meow name is " + this.name
-    //         : "I don't have a name";
-    //     console.log(greeting);
-    // };
-  
-    // await newCustomer.save();
-    // const customers = await Customer.find();
-    // console.log(customers);
-
-}
-
-app.use(cors({ origin: 'http://localhost:3000' }));
+// Middleware
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
+app.use(
+  session({
+    secret: "secretcode",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+app.use(cookieParser("secretcode"));
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+require("./passportConfig")(passport);
+
+// Routes
 const port = 4000;
 
 app.get('/', function (req, res) {
@@ -55,10 +59,18 @@ app.post('/login', function (req, res) {
   console.log(req.body.email, req.body.password);
 });
 
-app.post('/signup', function (req, res) {
+app.post("/signup", (req, res) => {
   console.log(req.body.email, req.body.password);
-  const newCustomer = new Customer({ email: req.body.email, password: req.body.password});
-  newCustomer.save();
+  Customer.findOne({ email: req.body.email }, async (err, doc) => {
+    if (err) throw err;
+    if (doc) res.send("E-mail Is Already In Use");
+    if (!doc) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+      const newCustomer = new Customer({ email: req.body.email, password: hashedPassword });
+      await newCustomer.save();
+      res.send("Account Created");
+    }
+  });
 });
 
 app.listen(port, function () {
