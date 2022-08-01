@@ -1,60 +1,44 @@
-import { useState } from 'react';
+import React, { useState } from "react";
 import { Form, Button } from 'react-bootstrap';
+import Axios from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './log-in.css';
 
+function App() {
 
-function LogIn() {
-
-    const [accountData, setAccountData] = useState({
-        email: "",
-        password: ""
-    });
-
-    const updateAccountData = (event) => {
-        setAccountData((prevProps) => ({
-            ...prevProps,
-            [event.target.name]: event.target.value
-        }));
-    };
-
-    function submitAccountData() {
-
-        console.log(accountData);
-        fetch('http://localhost:4000/login', {
+    const [loginUsername, setLoginUsername] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
+    const [data, setData] = useState(null);
+    const login = () => {
+        Axios({
             method: "POST",
-            headers: {
-                'Content-type': 'application/json'
+            data: {
+                username: loginUsername,
+                password: loginPassword,
             },
-            body: JSON.stringify(accountData)
-        })
-            .then((response) => response.json())
-            .then((result) => {
-                console.log(result)
-            })
-    }
-
+            withCredentials: true,
+            url: "http://localhost:4000/login",
+        }).then((res) => console.log(res));
+    };
     return (
         <div class="center">
-            <Form onSubmit={submitAccountData}>
-                
+                <h1>Login</h1>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control onChange={updateAccountData} name="email" value={accountData.email} sizetype="email" placeholder="Enter email" />
-                    <Form.Text className="text-muted">
-                    </Form.Text>
+                    <Form.Control placeholder="Enter email"
+                        onChange={(e) => setLoginUsername(e.target.value)} name="email" value={loginUsername} sizetype="email" />
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={updateAccountData} value={accountData.password} name="password" type="password" placeholder="Password" />
+                    <Form.Control placeholder="Enter password"
+                        onChange={(e) => setLoginPassword(e.target.value)} name="email" value={loginPassword} sizetype="email" />
                 </Form.Group>
-                <Button variant="secondary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+                <Button variant="secondary" type="submit" onClick={login}>Submit</Button>
+        
         </div>
+
     );
+
 }
 
-export default LogIn;
+export default App;

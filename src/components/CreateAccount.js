@@ -46,7 +46,7 @@ function CreateAccount() {
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control onChange={updateAccountData} value={accountData.password} name="password" type="password" placeholder="Password" />
+                    <Form.Control onChange={updateAccountData} value={accountData.password} name="password" type="password" placeholder="Enter password" />
                 </Form.Group>
                 <Button variant="secondary" type="submit">
                     Submit
