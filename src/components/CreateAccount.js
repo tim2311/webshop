@@ -19,7 +19,7 @@ function CreateAccount() {
     };
 
     function submitAccountData() {
-        
+
         console.log(accountData);
         fetch('http://localhost:4000/signup', {
             method: "POST",
@@ -37,6 +37,7 @@ function CreateAccount() {
     return (
         <div class="center">
             <Form onSubmit={submitAccountData}>
+                <h1 class="header">Register</h1>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control onChange={updateAccountData} name="email" value={accountData.email} sizetype="email" placeholder="Enter email" />

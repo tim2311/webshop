@@ -22,7 +22,8 @@ function App() {
     };
     return (
         <div class="center">
-                <h1>Login</h1>
+            <Form>
+            <h1 class="header">Login</h1>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control placeholder="Enter email"
@@ -34,7 +35,7 @@ function App() {
                         onChange={(e) => setLoginPassword(e.target.value)} name="email" value={loginPassword} sizetype="email" />
                 </Form.Group>
                 <Button variant="secondary" type="submit" onClick={login}>Submit</Button>
-        
+            </Form>
         </div>
 
     );
