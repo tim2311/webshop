@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import Blogs from "./components/Blogs";
+import Products from "./components/Products";
 import Contact from "./components/Contact";
 import LogIn from "./components/LogIn";
 import CreateAccount from "./components/CreateAccount";
@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
       <Routes>
           <Route path="/" element={<Home />}>
-          <Route path="blogs" element={<Blogs />} />
+          <Route path="Products" element={<Products />} />
           <Route path="contact" element={<Contact />} />
           <Route path="login" element={<LogIn/>}/>
           <Route path="createaccount" element={<CreateAccount/>}/>
