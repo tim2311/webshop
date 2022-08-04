@@ -6,7 +6,7 @@ import Contact from "./components/Contact";
 import LogIn from "./components/LogIn";
 import CreateAccount from "./components/CreateAccount";
 import NoPage from "./components/NoPage";
-import ShoppingCart from "./components/ShoppingCart";
+import Basket from "./components/Basket";
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
           <Route path="login" element={<LogIn/>}/>
           <Route path="createaccount" element={<CreateAccount/>}/>
           <Route path="*" element={<NoPage/>}/>
-          <Route path="shoppingcart" element={<ShoppingCart/>}/>
+          <Route path="basket" element={<Basket/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
