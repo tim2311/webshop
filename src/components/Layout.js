@@ -15,6 +15,7 @@ const Layout = () => {
             <Nav.Link as={Link} to="/">Home</Nav.Link>
             <Nav.Link as={Link} to="/Products">Products</Nav.Link>
             <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>
+            <Nav.Link as={Link} to="/ShoppingCart">Shopping Cart</Nav.Link>
             <NavDropdown title="Account" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="LogIn">Log In</NavDropdown.Item>
               <NavDropdown.Item as={Link} to="CreateAccount">Create Account</NavDropdown.Item>
