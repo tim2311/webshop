@@ -13,7 +13,7 @@ const Layout = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/ProductsDisplay">Products</Nav.Link>
+            <Nav.Link as={Link} to="/Products">Products</Nav.Link>
             <Nav.Link as={Link} to="/Contact">Contact</Nav.Link>
             <Nav.Link as={Link} to="/Basket">Shopping Cart</Nav.Link>
             <NavDropdown title="Account" id="basic-nav-dropdown">
